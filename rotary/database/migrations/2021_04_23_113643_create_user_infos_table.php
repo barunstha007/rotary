@@ -23,26 +23,21 @@ class CreateUserInfosTable extends Migration
             $table->integer('phone_number');
 
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('district_id');
-            $table->unsignedBigInteger('municipality_id');
-            $table->unsignedBigInteger('ward_id');
-            $table->unsignedBigInteger('company_id');
+            $table->unsignedInteger('district_id');
+            $table->unsignedInteger('municipality_id');
+            $table->unsignedInteger('ward_id');
+            $table->unsignedInteger('company_id');
 
 
             $table->foreign('user_id')
                     ->references('id')
                     ->on('users')    
                     ->onDelete('cascade');
-            
-            $table->foreign('district_id')
-                   ->references('id')
-                   ->on('districts')
-                   ->onDelete('cascade'); 
 
-            // $table->foreign('district_id')
-            //         ->references('id')
-            //         ->on('districts')    
-            //         ->onDelete('cascade');
+            $table->foreign('district_id')
+                    ->references('id')
+                    ->on('districts')    
+                    ->onDelete('cascade');
 
             $table->foreign('municipality_id')
                     ->references('id')
