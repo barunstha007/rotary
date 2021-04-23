@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password' , 'user'
+        'name', 'email', 'password' , 'user','district','company','municipality','ward'
     ];
 
     /**
@@ -38,4 +38,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function district(){
+        return $this->hasOne(District::class);
+    }
+
+    public function municipality(){
+        return $this->hasOne(Municipality::class);
+    }
+
+    public function ward(){
+        return $this->hasOne(Ward::class);
+    }
+
+    public function company(){
+        return $this->hasOne(Company::class);
+    }
 }

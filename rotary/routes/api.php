@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::resource('district','API\DistrictApiController');
+Route::resource('company','API\CompanyApiController');
+Route::resource('ward','API\WardApiController');
+Route::resource('municipality','API\MunicipalityApiController');
+
+Route::POST('register','API\RegisterApiController@create');
+
