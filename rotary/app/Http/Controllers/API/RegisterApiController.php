@@ -5,9 +5,15 @@ namespace App\Http\Controllers\API;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use App\UserInfo;
+use App\Utils\ResponseUtils;
+
 
 class RegisterApiController extends Controller
 {
+    use ResponseUtils;
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -18,7 +24,7 @@ class RegisterApiController extends Controller
             'ward' => ['required','string'],
             'municipality' => ['required','string'],
             'company' => ['required','string'],
-            'number' => ['required','integer'],
+            'phone_number' => ['required','integer'],
 
 
 
@@ -32,25 +38,46 @@ class RegisterApiController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(Request $request, User $user)
     {
          $user=User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'district' =>$data['district'],
-            'ward' =>$data['ward'],
-            'municipality' =>$data['municipality'],
-            'company' =>$data['company'],
-            'number' =>$data['number']
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request['password']),
+            'phone_number' =>$request->phone_number,
+
+           
+
+            
+
+
             ]); 
 
-        //   $user = User::latest()->get();
+            // echo($request->phone_number); die();
 
-          if (is_null($user) || empty($user)) {
+
+            $userinfo = UserInfo::create([
+                'user_id' => $user->id, 
+                'name' => $request->name,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'district_id' => $request->district_id,
+            'municipality_id' => $request->municipality_id,
+            'ward_id' => $request->ward_id,
+            'company_id' => $request->company_id
+
+            
+
+            // $user->Userinfo()->attach(
+            ]);
+
+            
+
+          if (is_null($userinfo) || empty($userinfo)) {                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
             return $this->json_response("No clients found", null, 'fail', 200);
         }
-        return $this->json_response("Clients fetched.", $user, 'success', 200);
+        return $this->json_response("Clients fetched.", $userinfo, 'success', 200);
 
 
 
