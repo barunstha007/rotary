@@ -18,7 +18,8 @@
         "laravel/ui": "^2.4",
         "laravelcollective/html": "^6.2",
         "paragonie/random_compat": "~2.0",
-        "spatie/laravel-permission": "^4.0"
+        "spatie/laravel-permission": "^4.0",
+        "willvincent/laravel-rateable": "^2.3"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

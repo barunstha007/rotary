@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class LoginApiController extends Controller
 {
-    //
+    public function login()
+    {
+        
+    }
 }
